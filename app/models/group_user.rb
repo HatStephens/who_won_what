@@ -5,7 +5,7 @@ class GroupUser < ActiveRecord::Base
   def self.add_user_to_group(user, group)
     group.group_users.build do |gu|
       gu.user = user
-    end
+    end.save
   end
 
 end

@@ -1,4 +1,8 @@
 <%= form_for @group do |f| %>
-  <%= collection_select(:group, :user_id, User.all, :id, :email) %>
+  <%= collection_select(:group, :user_id, @users_to_add, :id, :email) %>
   <%= f.submit %>
+<% end unless @users_to_add.empty? %>
+
+<% if @users_to_add.empty? %>
+  <p>There are no users to add to your group.</p>
 <% end %>

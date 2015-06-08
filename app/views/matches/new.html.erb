@@ -1,0 +1,5 @@
+<%= form_for @match, url: group_matches_path do |f| %>
+  <%= select_tag('user_one', options_from_collection_for_select(User.all, "id", "email")) %>
+  <%= select_tag('user_two', options_from_collection_for_select(User.all, "id", "email")) %>
+  <%= f.submit %>
+<% end %>

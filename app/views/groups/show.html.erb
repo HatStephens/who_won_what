@@ -3,9 +3,12 @@
 <p>Members:</p>
 <ul>
   <% @members.each do |member| %>
-    <li><%= member.email %></li>
+    <li><%= member.user.email %></li>
   <% end %>
 </ul>
 <% if @owner == current_user %>
   <%= link_to('Add another user to this group', edit_group_path(@group)) %></p>
 <% end %>
+
+
+<%= link_to('Add a match', new_group_match_path(@group)) %>

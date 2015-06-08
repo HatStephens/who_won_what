@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
   get 'dashboard' => 'dashboard#show'
 
-  resources :groups
+  resources :groups, shallow: true do
+    resources :matches
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
