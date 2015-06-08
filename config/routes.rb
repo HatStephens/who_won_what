@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # root 'pages#home'
 
   get 'pages/home' => 'high_voltage/pages#show', id: 'home'
-  get 'pages/dashboard' => 'high_voltage/pages#show', id: 'dashboard'
+  get 'dashboard' => 'dashboard#show'
 
   resources :groups
 

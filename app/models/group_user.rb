@@ -7,4 +7,5 @@ class GroupUser < ActiveRecord::Base
       gu.user = user
     end
   end
+
 end

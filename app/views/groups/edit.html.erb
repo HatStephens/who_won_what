@@ -1,0 +1,4 @@
+<%= form_for @group do |f| %>
+  <%= collection_select(:group, :user_id, User.all, :id, :email) %>
+  <%= f.submit %>
+<% end %>

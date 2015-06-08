@@ -1,0 +1,11 @@
+<%= @group.name %>
+<p>Owner: <%= @owner.email %></p>
+<p>Members:</p>
+<ul>
+  <% @members.each do |member| %>
+    <li><%= member.email %></li>
+  <% end %>
+</ul>
+<% if @owner == current_user %>
+  <%= link_to('Add another user to this group', edit_group_path(@group)) %></p>
+<% end %>
