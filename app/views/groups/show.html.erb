@@ -2,7 +2,7 @@
 <p>Owner: <%= @owner.email %></p>
 <p>Members:</p>
 <ul>
-  <% @members.each do |member| %>
+  <% @other_members.each do |member| %>
     <li><%= member.user.email %></li>
   <% end %>
 </ul>
@@ -10,5 +10,28 @@
   <%= link_to('Add another user to this group', edit_group_path(@group)) %></p>
 <% end %>
 
-
+<p>Number of matches played by this group: <%= @matches.count %></p>
 <%= link_to('Add a match', new_group_match_path(@group)) %>
+
+<table>
+  <thead>
+    <th>Player</th>
+    <th>Player</th>
+    <th>Matches</th>
+    <th>Goals For</th>
+    <th>Goals Against</th>
+  </thead>
+  <tbody>
+  <% @members.each_with_index do |member, i| %>
+    <% @members.drop(i+1).each do |oppo| %>
+      <tr>
+        <td><%= member.user.email %></td>
+        <td><%= oppo.user.email %></td>
+        <td><%= @group.matches_between_players?(member.user, oppo.user).count %></td>
+        <td><%= @group.goals_for(member.user, oppo.user) %></td>
+        <td><%= @group.goals_against(member.user, oppo.user) %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

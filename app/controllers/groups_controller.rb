@@ -13,14 +13,17 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @owner = User.find(@group.user_id)
-    @members = @group.members_not_including_owner
+    @members = @group.group_users
+    @other_members = @group.members_not_including_owner
+    @matches = Match.where(group: @group)
   end
 
   def edit
     @group = Group.find(params[:id])
+    @users = User.all
     @users_to_add = []
-    @group.members_not_including_owner.each do |member|
-      @users_to_add << member.user unless member.user.group_users.group(@group)
+    @users.each do |user|
+      @users_to_add << user unless (user.groups.include?(@group) || user.group_users.map{|gu| gu.group == @group}.present?)
     end
   end
 
