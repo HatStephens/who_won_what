@@ -15,23 +15,31 @@
 
 <table>
   <thead>
-    <th>Player</th>
-    <th>Player</th>
+    <th>Pairing</th>
     <th>Matches</th>
     <th>Goals For</th>
     <th>Goals Against</th>
+    <th>Wins For</th>
+    <th>Draws</th>
+    <th>Wins Against</th>
+    <th>Big Wins For</th>
+    <th>Big Wins Against</th>
+    <th>Bore Draws</th>
   </thead>
   <tbody>
-  <% @members.each_with_index do |member, i| %>
-    <% @members.drop(i+1).each do |oppo| %>
-      <tr>
-        <td><%= member.user.email %></td>
-        <td><%= oppo.user.email %></td>
-        <td><%= @group.matches_between_players?(member.user, oppo.user).count %></td>
-        <td><%= @group.goals_for(member.user, oppo.user) %></td>
-        <td><%= @group.goals_against(member.user, oppo.user) %></td>
-      </tr>
-    <% end %>
+  <% @pairings.each do |pairing| %>
+    <tr>
+      <td><%= pairing.display %></td>
+      <td><%= pairing.matches_count %></td>
+      <td><%= pairing.player_one_goals %></td>
+      <td><%= pairing.player_two_goals %></td>
+      <td><%= pairing.player_one_wins %></td>
+      <td><%= pairing.draws %></td>
+      <td><%= pairing.player_two_wins %></td>
+      <td><%= pairing.player_one_big_wins %></td>
+      <td><%= pairing.player_two_big_wins %></td>
+      <td><%= pairing.bore_draws %></td>
+    </tr>
   <% end %>
   </tbody>
 </table>

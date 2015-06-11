@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
     @members = @group.group_users
     @other_members = @group.members_not_including_owner
     @matches = Match.where(group: @group)
+    @pairings = @group.group_user_pairings
   end
 
   def edit
@@ -23,7 +24,7 @@ class GroupsController < ApplicationController
     @users = User.all
     @users_to_add = []
     @users.each do |user|
-      @users_to_add << user unless (user.groups.include?(@group) || user.group_users.map{|gu| gu.group == @group}.present?)
+      @users_to_add << user unless (user.groups.include?(@group) || user.group_users.select{|gu| gu.group == @group}.present?)
     end
   end
 

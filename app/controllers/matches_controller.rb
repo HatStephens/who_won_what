@@ -5,16 +5,12 @@ class MatchesController < ApplicationController
   end
 
   def create
-    unless params[:user_one] == params[:user_two]
-      @match = Match.new(group: Group.find(params[:group_id]))
-      if @match.save
-        @match.add_a_player(User.find(params[:user_one]), params[:user_one_goals])
-        @match.add_a_player(User.find(params[:user_two]), params[:user_two_goals])
-        redirect_to group_path(params[:group_id])
-      end
-    else
-      flash[:alert] = "Players cannot be the same!"
-      redirect_to(:back)
+    @goals = [params[:user_one_goals], params[:user_two_goals]]
+    @pairing = GroupUserPairing.find(params[:group_user_pairing])
+    @match = Match.new(group: Group.find(params[:group_id]), group_user_pairing: @pairing)
+    if @match.save
+      @match.add_players_and_goals(@pairing, @goals)
+      redirect_to group_path(params[:group_id])
     end
   end
 

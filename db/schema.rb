@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609213137) do
+ActiveRecord::Schema.define(version: 20150610225955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "group_user_pairings", force: :cascade do |t|
+    t.integer  "group_user_one"
+    t.integer  "group_user_two"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "group_id"
+  end
+
+  add_index "group_user_pairings", ["group_id"], name: "index_group_user_pairings_on_group_id", using: :btree
 
   create_table "group_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -48,11 +58,13 @@ ActiveRecord::Schema.define(version: 20150609213137) do
 
   create_table "matches", force: :cascade do |t|
     t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "group_user_pairing_id"
   end
 
   add_index "matches", ["group_id"], name: "index_matches_on_group_id", using: :btree
+  add_index "matches", ["group_user_pairing_id"], name: "index_matches_on_group_user_pairing_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,10 +84,12 @@ ActiveRecord::Schema.define(version: 20150609213137) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "group_user_pairings", "groups"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "match_players", "matches"
   add_foreign_key "match_players", "users"
+  add_foreign_key "matches", "group_user_pairings"
   add_foreign_key "matches", "groups"
 end
