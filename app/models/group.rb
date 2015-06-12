@@ -2,9 +2,12 @@ class Group < ActiveRecord::Base
 
   belongs_to :user
 
+  default_scope { where(deleted_on: nil) }
+
   has_many :group_users
   has_many :matches
   has_many :group_user_pairings
+
 
   validates_presence_of :user
 
@@ -19,6 +22,11 @@ class Group < ActiveRecord::Base
     create_group_user_pairing(group_users.last)
   end
 
+  def remove_member_from_group(member)
+    @group_user = GroupUser.find_by(user: member.user, group: self)
+    @group_user.destroy
+  end
+
   def create_group_user_pairing(group_user)
     group_users.each do |gu|
       self.group_user_pairings.build(group_user_one: gu.id, group_user_two: group_user.id).save unless gu == group_user
@@ -26,7 +34,8 @@ class Group < ActiveRecord::Base
   end
 
   def members_not_including_owner
-    group_users.reject{|gu| gu.user.id == user.id }
+    @members = group_users.reject{|gu| gu.user.id == user.id }
+    @members.map(&:user)
   end
 
   # def big_wins(user_one, user_two)

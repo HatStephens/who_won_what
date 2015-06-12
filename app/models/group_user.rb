@@ -8,4 +8,8 @@ class GroupUser < ActiveRecord::Base
     end.save
   end
 
+  def name
+    user.name
+  end
+
 end

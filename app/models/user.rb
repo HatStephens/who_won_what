@@ -7,4 +7,16 @@ class User < ActiveRecord::Base
   has_many :groups
   has_many :group_users
 
+  def name
+    nickname ? nickname : "#{first_name} #{last_name}"
+  end
+
+  def all_groups
+    group_users.map(&:group)
+  end
+
+  def all_active_groups
+    all_groups.reject(&:nil?)
+  end
+
 end

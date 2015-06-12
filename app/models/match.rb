@@ -10,7 +10,6 @@ class Match < ActiveRecord::Base
     MatchPlayer.add_to_match(self, pairing.player_two, goals.last)
   end
 
-
   def player_goals(user)
     MatchPlayer.where(match: self, user: user).first.goals
   end

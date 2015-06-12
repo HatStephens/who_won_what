@@ -3,6 +3,7 @@ class GroupUserPairing < ActiveRecord::Base
   belongs_to :group
 
   has_many :matches
+  has_many :group_users
 
   def player_one
     GroupUser.find(group_user_one).user
@@ -13,7 +14,7 @@ class GroupUserPairing < ActiveRecord::Base
   end
 
   def display
-    "#{player_one.email} vs #{player_two.email}"
+    "#{player_one.name} vs #{player_two.name}"
   end
 
   def matches_count

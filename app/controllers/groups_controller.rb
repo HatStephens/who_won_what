@@ -12,13 +12,11 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @owner = User.find(@group.user_id)
-    @members = @group.group_users
+    @owner = @group.user
     @other_members = @group.members_not_including_owner
-    @matches = Match.where(group: @group)
-    @pairings = @group.group_user_pairings
   end
 
+  # Adding users needs to be thought out
   def edit
     @group = Group.find(params[:id])
     @users = User.all
@@ -33,6 +31,15 @@ class GroupsController < ApplicationController
     @new_member = User.find(params[:group][:user_id])
     @group.add_member_to_group(@new_member)
     redirect_to group_path(@group)
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.group_users.each do |gu|
+      @group.remove_member_from_group(gu)
+    end
+    @group.deleted_on = Date.today
+    redirect_to dashboard_path if @group.save
   end
 
   private
