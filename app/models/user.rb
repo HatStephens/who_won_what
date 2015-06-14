@@ -5,18 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :groups
+  has_many :groups, through: :group_users
   has_many :group_users
+  has_many :matches
+  has_many :match_players
 
   def name
     nickname ? nickname : "#{first_name} #{last_name}"
-  end
-
-  def all_groups
-    group_users.map(&:group)
-  end
-
-  def all_active_groups
-    all_groups.reject(&:nil?)
   end
 
 end

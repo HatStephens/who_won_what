@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     return dashboard_path
     super
   end
+
+  def current_group_user(group)
+    current_user.group_users.where(group: group).first
+  end
 end

@@ -4,9 +4,10 @@ class Group < ActiveRecord::Base
 
   default_scope { where(deleted_on: nil) }
 
+  has_many :users, through: :group_users
   has_many :group_users
   has_many :matches
-  has_many :group_user_pairings
+  has_many :fixtures
 
 
   validates_presence_of :user
@@ -19,7 +20,7 @@ class Group < ActiveRecord::Base
 
   def add_member_to_group(new_member)
     GroupUser.add_user_to_group(new_member, self)
-    create_group_user_pairing(group_users.last)
+    create_fixtures_for(group_users.last)
   end
 
   def remove_member_from_group(member)
@@ -27,15 +28,23 @@ class Group < ActiveRecord::Base
     @group_user.destroy
   end
 
-  def create_group_user_pairing(group_user)
+  def create_fixtures_for(group_user)
     group_users.each do |gu|
-      self.group_user_pairings.build(group_user_one: gu.id, group_user_two: group_user.id).save unless gu == group_user
+      unless(gu == group_user)
+       new_fixture = self.fixtures.build(group: self)
+       new_fixture.save
+       add_group_users_to_fixture(group_user, gu, new_fixture)
+      end
     end
   end
 
+  def add_group_users_to_fixture(group_user_one, group_user_two, fixture)
+    fixture.fixture_group_users.build(group_user: group_user_one).save
+    fixture.fixture_group_users.build(group_user: group_user_two).save
+  end
+
   def members_not_including_owner
-    @members = group_users.reject{|gu| gu.user.id == user.id }
-    @members.map(&:user)
+    users.reject{|u| u == user }
   end
 
   # def big_wins(user_one, user_two)

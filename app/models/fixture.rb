@@ -1,16 +1,16 @@
-class GroupUserPairing < ActiveRecord::Base
+class Fixture < ActiveRecord::Base
 
   belongs_to :group
-
+  has_many :group_users, through: :fixture_group_users
+  has_many :fixture_group_users
   has_many :matches
-  has_many :group_users
 
   def player_one
-    GroupUser.find(group_user_one).user
+    group_users[0].user
   end
 
   def player_two
-    GroupUser.find(group_user_two).user
+    group_users[1].user
   end
 
   def display
@@ -22,15 +22,11 @@ class GroupUserPairing < ActiveRecord::Base
   end
 
   def player_one_goals
-    goals(player_one).flatten.sum
+    matches.map{|m| m.player_one_goals}.sum
   end
 
   def player_two_goals
-    goals(player_two).flatten.sum
-  end
-
-  def goals(player)
-    matches.map{|m| m.player_goals(player)}
+    matches.map{|m| m.player_two_goals}.sum
   end
 
   def player_one_big_wins

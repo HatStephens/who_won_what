@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
 
   def show
-    @groups = current_user.all_active_groups
+    @groups = current_user.groups
   end
 
 end

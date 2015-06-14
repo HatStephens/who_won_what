@@ -1,5 +1,5 @@
 <%= form_for @match, url: group_matches_path do |f| %>
-  <%= select_tag(:group_user_pairing, options_from_collection_for_select(@pairings, "id", "display")) %>
+  <%= select_tag(:fixture, options_from_collection_for_select(@fixtures, "id", "display")) %>
   <%= select_tag('user_one_goals', options_for_select((0..20))) %>
   <%= select_tag('user_two_goals', options_for_select((0..20))) %>
   <%= f.submit %>

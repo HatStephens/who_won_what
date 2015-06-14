@@ -3,16 +3,16 @@ class MatchesController < ApplicationController
   def new
     @match = Match.new
     @group = Group.find(params[:group_id])
-    @pairings = @group.group_user_pairings
+    @fixtures = @group.fixtures
   end
 
   def create
     @goals = [params[:user_one_goals], params[:user_two_goals]]
-    @pairing = GroupUserPairing.find(params[:group_user_pairing])
+    @fixture = Fixture.find(params[:fixture])
     @group = Group.find(params[:group_id])
-    @match = Match.new(group: @group, group_user_pairing: @pairing)
+    @match = Match.new(group: @group, fixture: @fixture)
     if @match.save
-      @match.add_players_and_goals(@pairing, @goals)
+      @match.add_players_and_goals(@fixture, @goals)
       redirect_to group_matches_path(@group)
     end
   end
@@ -20,7 +20,8 @@ class MatchesController < ApplicationController
   def index
     @group = Group.find(params[:group_id])
     @matches = Match.where(group: @group)
-    @pairings = @group.group_user_pairings
+    @fixtures = @group.fixtures
+    @group_user = current_group_user(@group)
   end
 
   # private

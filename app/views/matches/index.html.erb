@@ -3,7 +3,7 @@
 
 <table>
   <thead>
-    <th>Pairing</th>
+    <th>Fixture</th>
     <th>Matches</th>
     <th>Goals For</th>
     <th>Goals Against</th>
@@ -15,19 +15,24 @@
     <th>Bore Draws</th>
   </thead>
   <tbody>
-  <% @pairings.each do |pairing| %>
+  <% @fixtures.each do |fixture| %>
     <tr>
-      <td><%= pairing.display %></td>
-      <td><%= pairing.matches_count %></td>
-      <td><%= pairing.player_one_goals %></td>
-      <td><%= pairing.player_two_goals %></td>
-      <td><%= pairing.player_one_wins %></td>
-      <td><%= pairing.draws %></td>
-      <td><%= pairing.player_two_wins %></td>
-      <td><%= pairing.player_one_big_wins %></td>
-      <td><%= pairing.player_two_big_wins %></td>
-      <td><%= pairing.bore_draws %></td>
+      <td><%= fixture.display %></td>
+      <td><%= fixture.matches_count %></td>
+      <td><%= fixture.player_one_goals %></td>
+      <td><%= fixture.player_two_goals %></td>
+      <td><%= fixture.player_one_wins %></td>
+      <td><%= fixture.draws %></td>
+      <td><%= fixture.player_two_wins %></td>
+      <td><%= fixture.player_one_big_wins %></td>
+      <td><%= fixture.player_two_big_wins %></td>
+      <td><%= fixture.bore_draws %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+<br/>
+<hr/>
+<p>My Stats:</p>
+<p>Matches Played: <%= @group_user.total_matches %></p>
+<p>Goals Scored: <%= @group_user.
