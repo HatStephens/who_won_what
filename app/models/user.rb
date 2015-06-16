@@ -7,11 +7,10 @@ class User < ActiveRecord::Base
   has_many :groups
   has_many :groups, through: :group_users
   has_many :group_users
-  has_many :matches
-  has_many :match_players
+  # has_many :match_players
 
   def name
-    nickname ? nickname : "#{first_name} #{last_name}"
+    (nickname == "") ? "#{first_name} #{last_name}" : nickname
   end
 
 end

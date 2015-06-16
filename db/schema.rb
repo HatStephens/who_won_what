@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614221738) do
+ActiveRecord::Schema.define(version: 20150616185944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,10 +27,8 @@ ActiveRecord::Schema.define(version: 20150614221738) do
   add_index "fixture_group_users", ["group_user_id"], name: "index_fixture_group_users_on_group_user_id", using: :btree
 
   create_table "fixtures", force: :cascade do |t|
-    t.integer  "group_user_one"
-    t.integer  "group_user_two"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "group_id"
   end
 
@@ -59,14 +57,14 @@ ActiveRecord::Schema.define(version: 20150614221738) do
 
   create_table "match_players", force: :cascade do |t|
     t.integer  "match_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "goals"
+    t.integer  "fixture_group_user_id"
   end
 
+  add_index "match_players", ["fixture_group_user_id"], name: "index_match_players_on_fixture_group_user_id", using: :btree
   add_index "match_players", ["match_id"], name: "index_match_players_on_match_id", using: :btree
-  add_index "match_players", ["user_id"], name: "index_match_players_on_user_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
     t.integer  "group_id"
@@ -105,8 +103,8 @@ ActiveRecord::Schema.define(version: 20150614221738) do
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
+  add_foreign_key "match_players", "fixture_group_users"
   add_foreign_key "match_players", "matches"
-  add_foreign_key "match_players", "users"
   add_foreign_key "matches", "fixtures"
   add_foreign_key "matches", "groups"
 end

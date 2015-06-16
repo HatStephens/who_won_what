@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
 
   has_many :users, through: :group_users
   has_many :group_users
-  has_many :matches
+  has_many :matches, through: :fixtures
   has_many :fixtures
 
 
@@ -46,20 +46,4 @@ class Group < ActiveRecord::Base
   def members_not_including_owner
     users.reject{|u| u == user }
   end
-
-  # def big_wins(user_one, user_two)
-  #   @matches = matches_between_players?(user_one, user_two)
-  #   @big_wins = @matches.map{|m| m.check_big_win}
-  # end
-
-  # def big_wins_for(user_one, user_two)
-  #   @big_wins = big_wins(user_one, user_two)
-  #   @big_wins.select{|bw| bw.try(:user) == user_one}.count unless @big_wins.empty?
-  # end
-
-  # def big_wins_against(user_one, user_two)
-  #   @big_wins = big_wins(user_one, user_two)
-  #   @big_wins.select{|bw| bw.try(:user) == user_two}.count unless @big_wins.empty?
-  # end
-
 end

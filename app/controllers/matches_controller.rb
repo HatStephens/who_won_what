@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
-    @matches = Match.where(group: @group)
+    @matches = @group.matches
     @fixtures = @group.fixtures
     @group_user = current_group_user(@group)
   end

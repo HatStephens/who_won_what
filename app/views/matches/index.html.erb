@@ -13,6 +13,8 @@
     <th>Big Wins For</th>
     <th>Big Wins Against</th>
     <th>Bore Draws</th>
+    <th>Clean Sheets For</th>
+    <th>Clean Sheets Against</th>
   </thead>
   <tbody>
   <% @fixtures.each do |fixture| %>
@@ -27,12 +29,22 @@
       <td><%= fixture.player_one_big_wins %></td>
       <td><%= fixture.player_two_big_wins %></td>
       <td><%= fixture.bore_draws %></td>
+      <td><%= fixture.player_one_clean_sheets %></td>
+      <td><%= fixture.player_two_clean_sheets %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 <br/>
 <hr/>
-<p>My Stats:</p>
+<p><strong>My Stats:</strong></p>
 <p>Matches Played: <%= @group_user.total_matches %></p>
-<p>Goals Scored: <%= @group_user.
+<p>Matches Won: <%= @group_user.total_matches_won %></p>
+<p>Matches Drawn: <%= @group_user.total_matches_drawn %></p>
+<p>Matches Lost: <%= @group_user.total_matches_lost %></p>
+<p>Goals Scored: <%= @group_user.total_goals_scored %></p>
+<p>Goals Conceded: <%= @group_user.total_goals_conceded %></p>
+<p>Big Wins: <%= @group_user.total_goals_scored %></p>
+<p>Big Losses: <%= @group_user.total_goals_conceded %></p>
+<p>Bore Draws: <%= @group_user.total_bore_draws %></p>
+<p>Clean Sheets: <%= @group_user.total_clean_sheets %></p>
