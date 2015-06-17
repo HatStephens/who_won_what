@@ -1,0 +1,11 @@
+<h3>Matches:</h3>
+<table>
+  <thead>
+    <th><%= @fixture.display %></th>
+  </thead>
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr><td><%= match.score %></td></tr>
+    <% end %>
+  </tbody>
+</table>

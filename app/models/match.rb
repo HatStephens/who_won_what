@@ -19,6 +19,10 @@ class Match < ActiveRecord::Base
     match_players[1]
   end
 
+  def score
+    "#{player_one_goals} - #{player_two_goals}"
+  end
+
   def goal_difference
     player_one_goals - player_two_goals
   end

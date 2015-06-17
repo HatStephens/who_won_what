@@ -30,31 +30,31 @@ class GroupUser < ActiveRecord::Base
   end
 
   def total_matches_won
-    fixture_group_users.map{ |fgu| fgu.amount_of_wins }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_wins }.count
   end
 
   def total_matches_lost
-    fixture_group_users.map{ |fgu| fgu.amount_of_losses }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_losses }.count
   end
 
   def total_matches_drawn
-    fixture_group_users.map{ |fgu| fgu.amount_of_draws }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_draws }.count
   end
 
   def total_big_wins
-    fixture_group_users.map{ |fgu| fgu.amount_of_big_wins }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_big_wins }.count
   end
 
   def total_big_losses
-    fixture_group_users.map{ |fgu| fgu.amount_of_losses }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_losses }.count
   end
 
   def total_bore_draws
-    fixture_group_users.map{ |fgu| fgu.amount_of_bore_draws }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_bore_draws }.count
   end
 
   def total_clean_sheets
-    fixture_group_users.map{ |fgu| fgu.amount_of_clean_sheets }.count
+    fixture_group_users.select{ |fgu| fgu.amount_of_clean_sheets }.count
   end
 
 end

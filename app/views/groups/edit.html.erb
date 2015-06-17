@@ -1,8 +1,24 @@
-<%= form_for @group do |f| %>
-  <%= collection_select(:group, :user_id, @users_to_add, :id, :email) %>
-  <%= f.submit %>
-<% end unless @users_to_add.empty? %>
+<h3>Edit Group Members</h3>
+<h4>Adding Users</h4>
 
 <% if @users_to_add.empty? %>
   <p>There are no users to add to your group.</p>
+<% else %>
+  <%= form_for @group do |f| %>
+    <%= collection_select(:group, :user_id, @users_to_add, :id, :email) %>
+    <%= hidden_field_tag :update_type, 'add' %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+
+
+<h4>Removing Users</h4>
+<% if @users_to_remove.empty? %>
+  <p>There are no users to remove from your group.</p>
+<% else %>
+  <%= form_for @group do |f| %>
+    <%= collection_select(:group, :user_id, @users_to_remove, :id, :email) %>
+    <%= hidden_field_tag :update_type, :remove %>
+    <%= f.submit %>
+  <% end %>
 <% end %>

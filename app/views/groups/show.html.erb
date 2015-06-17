@@ -1,4 +1,4 @@
-<%= @group.name %>
+<h3><%= @group.name %></h3>
 <p>Owner: <%= @owner.name %></p>
 <p>Members:</p>
 <ul>
@@ -7,10 +7,9 @@
   <% end %>
 </ul>
 <% if @owner == current_user %>
-  <%= link_to('Add another user to this group', edit_group_path(@group)) %></p>
+  <%= link_to('Edit Group Members', edit_group_path(@group)) %></p>
   <%= link_to('Delete this group', group_path(@group), data: { confirm: "Are you sure?" }, method: :delete )%>
 <% end %>
 <br/>
 <hr/>
-<p><strong>TODO:</strong> Need to be able to remove a member</p>
 <p><strong>TODO:</strong> Need to be able to remove yourself from a group</p>

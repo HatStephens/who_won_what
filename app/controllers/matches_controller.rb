@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
   def new
     @match = Match.new
     @group = Group.find(params[:group_id])
-    @fixtures = @group.fixtures
+    @fixtures = @group.fixtures.where(suspended_on: nil)
   end
 
   def create

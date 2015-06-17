@@ -19,7 +19,7 @@
   <tbody>
   <% @fixtures.each do |fixture| %>
     <tr>
-      <td><%= fixture.display %></td>
+      <td><%= link_to("#{fixture.display}", fixture_path(fixture)) %></td>
       <td><%= fixture.matches_count %></td>
       <td><%= fixture.player_one_goals %></td>
       <td><%= fixture.player_two_goals %></td>

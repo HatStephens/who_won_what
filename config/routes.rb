@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :groups, shallow: true do
     resources :matches
+    resources :fixtures, only: [:show]
   end
 
   # Example of regular route:

@@ -55,8 +55,10 @@ class Fixture < ActiveRecord::Base
   end
 
   def player_one_clean_sheets
+    player_one.amount_of_clean_sheets
   end
 
   def player_two_clean_sheets
+    player_two.amount_of_clean_sheets
   end
 end
