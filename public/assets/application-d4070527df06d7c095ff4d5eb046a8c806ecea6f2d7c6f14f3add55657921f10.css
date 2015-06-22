@@ -1,0 +1,46 @@
+/* line 6, /Users/steve/dev/steve/who_won_what/app/assets/stylesheets/groups.scss */
+.my_stats_group {
+  width: 45%;
+  float: left;
+}
+
+/* line 12, /Users/steve/dev/steve/who_won_what/app/assets/stylesheets/groups.scss */
+.today_group_results {
+  width: 45%;
+  float: right;
+  border-left: 1px solid black;
+  padding-left: 10px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+ td, th {
+  text-align: center;
+  border: solid black 1px;
+  margin: 2 2 2 2;
+  margin-right: 5px;
+  width: 50px;
+  padding: 3px;
+ }
+
+ th.fixture {
+  width: 150px;
+ }
+
+ table {
+  border-spacing: 5px;
+ }
