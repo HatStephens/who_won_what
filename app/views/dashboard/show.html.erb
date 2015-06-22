@@ -1,3 +1,4 @@
+<h3>My Groups</h3>
 <p>Here is a list of the Groups you currently belong to:</p>
 <ul>
   <% @groups.each do |group| %>
@@ -5,3 +6,16 @@
   <% end %>
 </ul>
 <%= link_to('Add a new Group', new_group_path) %>
+<br/>
+<hr/>
+<h3>My Stats:</h3>
+<p>Matches Played: <%= current_user.total_matches %></p>
+<p>Matches Won: <%= current_user.total_matches_won %></p>
+<p>Matches Drawn: <%= current_user.total_matches_drawn %></p>
+<p>Matches Lost: <%= current_user.total_matches_lost %></p>
+<p>Goals Scored: <%= current_user.total_goals_scored %></p>
+<p>Goals Conceded: <%= current_user.total_goals_conceded %></p>
+<p>Big Wins: <%= current_user.total_goals_scored %></p>
+<p>Big Losses: <%= current_user.total_goals_conceded %></p>
+<p>Bore Draws: <%= current_user.total_bore_draws %></p>
+<p>Clean Sheets: <%= current_user.total_clean_sheets %></p>

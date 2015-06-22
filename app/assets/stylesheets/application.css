@@ -19,6 +19,12 @@
   border: solid black 1px;
   margin: 2 2 2 2;
   margin-right: 5px;
+  width: 50px;
+  padding: 3px;
+ }
+
+ th.fixture {
+  width: 150px;
  }
 
  table {

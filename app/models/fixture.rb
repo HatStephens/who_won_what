@@ -14,7 +14,11 @@ class Fixture < ActiveRecord::Base
   end
 
   def display
-    "#{player_one.group_user.name} vs #{player_two.group_user.name}"
+    if suspended_on
+      "#{player_one.group_user.name} vs #{player_two.group_user.name} (SUS)"
+    else
+      "#{player_one.group_user.name} vs #{player_two.group_user.name}"
+    end
   end
 
   def matches_count
@@ -29,6 +33,21 @@ class Fixture < ActiveRecord::Base
     player_two.amount_of_goals_scored
   end
 
+  def total_goals
+    player_one_goals + player_two_goals
+  end
+
+  def goals_per_game
+    # (total_goals / matches_count).round(2) if matches_count>0
+  end
+
+  def player_one_goals_per_game
+    # ( player_one_goals / matches_count )
+  end
+
+  def player_two_goals_per_game
+    # ( player_two_goals / matches_count )
+  end
 
   def draws
     matches.select{ |m| m.draw? }.count
@@ -60,5 +79,9 @@ class Fixture < ActiveRecord::Base
 
   def player_two_clean_sheets
     player_two.amount_of_clean_sheets
+  end
+
+  def display_suspended_on
+    suspended_on.strftime("%-d %B %Y")
   end
 end

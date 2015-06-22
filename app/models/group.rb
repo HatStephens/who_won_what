@@ -64,4 +64,12 @@ class Group < ActiveRecord::Base
   def members_not_including_owner
     group_users.reject{|gu| gu.user == owner || gu.deleted_on.present? }
   end
+
+  def last_session
+    matches.last.created_at unless matches.empty?
+  end
+
+  def last_session_date
+    last_session.strftime("%-d %B %Y") if last_session
+  end
 end

@@ -22,6 +22,8 @@ class MatchesController < ApplicationController
     @matches = @group.matches
     @fixtures = @group.fixtures
     @group_user = current_group_user(@group)
+    @last_session_matches = @group.matches.where("matches.created_at >= :start_date AND matches.created_at <= :end_date",
+      {start_date: @group.last_session_date, end_date: @group.last_session})
   end
 
   # private

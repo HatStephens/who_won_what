@@ -30,7 +30,7 @@ class FixtureGroupUser < ActiveRecord::Base
   end
 
   def amount_of_losses
-    amount_of_matches - amount_of_wins - amount_of_draws
+    player_one? ? matches.select{ |m| m.goal_difference < 0 }.count : matches.select{ |m| m.goal_difference > 0 }.count
   end
 
   def amount_of_big_wins

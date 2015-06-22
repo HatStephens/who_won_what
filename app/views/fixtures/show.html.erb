@@ -2,10 +2,18 @@
 <table>
   <thead>
     <th><%= @fixture.display %></th>
+    <th>Match Date</th>
   </thead>
   <tbody>
     <% @matches.each do |match| %>
-      <tr><td><%= match.score %></td></tr>
+      <tr>
+        <td><%= match.score %></td>
+        <td><%= match.display_date %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
+<% if @fixture.suspended_on %>
+  <p>This fixture was suspended on <%= @fixture.display_suspended_on %>.</p>
+<% end %>
+<%= link_to('Back to Group Stats', group_matches_path(@group)) %>

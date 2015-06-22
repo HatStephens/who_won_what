@@ -6,6 +6,7 @@
     <li><%= member.name %></li>
   <% end %>
 </ul>
+<p><%= link_to('Go to Group Stats', group_matches_path(@group)) %></p>
 <% if @owner == current_user %>
   <%= link_to('Edit Group Members', edit_group_path(@group)) %></p>
   <%= link_to('Delete this group', group_path(@group), data: { confirm: "Are you sure?" }, method: :delete )%>

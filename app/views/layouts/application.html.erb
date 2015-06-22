@@ -12,6 +12,7 @@
 <% if current_user %>
   <nav>
     <%= link_to('Dashboard', dashboard_path) %>
+    Welcome, <%= current_user.name %>
     <%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %>
     <hr/>
   </nav>

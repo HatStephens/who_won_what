@@ -1,12 +1,15 @@
 <p>Number of matches played by this group: <%= @matches.count %></p>
 <%= link_to('Add a match', new_group_match_path(@group)) %>
-
+<%= link_to('Group Details', group_path(@group)) %>
 <table>
   <thead>
-    <th>Fixture</th>
+    <th class="fixture">Fixture</th>
     <th>Matches</th>
     <th>Goals For</th>
     <th>Goals Against</th>
+    <th>Goals Per Game For</th>
+    <th>Goals Per Game Against</th>
+    <th>Goals Per Game</th>
     <th>Wins For</th>
     <th>Draws</th>
     <th>Wins Against</th>
@@ -23,6 +26,9 @@
       <td><%= fixture.matches_count %></td>
       <td><%= fixture.player_one_goals %></td>
       <td><%= fixture.player_two_goals %></td>
+      <td><%= fixture.player_one_goals_per_game %></td>
+      <td><%= fixture.player_two_goals_per_game %></td>
+      <td><%= fixture.goals_per_game %></td>
       <td><%= fixture.player_one_wins %></td>
       <td><%= fixture.draws %></td>
       <td><%= fixture.player_two_wins %></td>
@@ -37,14 +43,22 @@
 </table>
 <br/>
 <hr/>
-<p><strong>My Stats:</strong></p>
-<p>Matches Played: <%= @group_user.total_matches %></p>
-<p>Matches Won: <%= @group_user.total_matches_won %></p>
-<p>Matches Drawn: <%= @group_user.total_matches_drawn %></p>
-<p>Matches Lost: <%= @group_user.total_matches_lost %></p>
-<p>Goals Scored: <%= @group_user.total_goals_scored %></p>
-<p>Goals Conceded: <%= @group_user.total_goals_conceded %></p>
-<p>Big Wins: <%= @group_user.total_goals_scored %></p>
-<p>Big Losses: <%= @group_user.total_goals_conceded %></p>
-<p>Bore Draws: <%= @group_user.total_bore_draws %></p>
-<p>Clean Sheets: <%= @group_user.total_clean_sheets %></p>
+<div class="my_stats_group">
+  <p><strong>My Stats for <%= @group.name %>:</strong></p>
+  <p>Matches Played: <%= @group_user.total_matches %></p>
+  <p>Matches Won: <%= @group_user.total_matches_won %></p>
+  <p>Matches Drawn: <%= @group_user.total_matches_drawn %></p>
+  <p>Matches Lost: <%= @group_user.total_matches_lost %></p>
+  <p>Goals Scored: <%= @group_user.total_goals_scored %></p>
+  <p>Goals Conceded: <%= @group_user.total_goals_conceded %></p>
+  <p>Big Wins: <%= @group_user.total_goals_scored %></p>
+  <p>Big Losses: <%= @group_user.total_goals_conceded %></p>
+  <p>Bore Draws: <%= @group_user.total_bore_draws %></p>
+  <p>Clean Sheets: <%= @group_user.total_clean_sheets %></p>
+</div>
+<div class="today_group_results">
+  <p><strong><%= @group.name %> Results from last session (<%= @group.last_session_date %>):</strong></p>
+  <% @last_session_matches.each do |match| %>
+    <p><%= match.fixture.display %> - <%= match.score %></p>
+  <% end %>
+</div>

@@ -63,4 +63,8 @@ class Match < ActiveRecord::Base
   def player_two_clean_sheet?
     player_one.goals == 0
   end
+
+  def display_date
+    created_at.strftime("%-d %B %Y")
+  end
 end
